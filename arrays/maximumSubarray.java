@@ -1,4 +1,4 @@
-Problem : Leetcode 53 Maximum SubArray
+/* Problem : Leetcode 53 Maximum SubArray
 Platform : Leetcode  
 Approach : Use KADANE Algorithm
    Maintain a current sum (currentSum)
@@ -10,9 +10,9 @@ Approach : Use KADANE Algorithm
   Output: 6
   Explanation: The subarray [4,-1,2,1] has the largest sum 6.
   
-Time Complexity : o(n)
-Space Complexity : o(1)  
-  
+Time Complexity : O(n)
+Space Complexity : O(1)  
+  */
   
 Code :
 
