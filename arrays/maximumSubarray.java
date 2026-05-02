@@ -1,6 +1,6 @@
 /* Problem : Leetcode 53 Maximum SubArray
 Platform : Leetcode  
-Approach : Use KADANE Algorithm 
+Approach : Use KADANE Algorithm  -> I Like You 
    Maintain a current sum (currentSum)
 - Add each element to currentSum
 - If currentSum becomes negative, reset it to 0
