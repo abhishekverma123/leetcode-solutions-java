@@ -35,3 +35,24 @@ Code :
 }
 
 
+
+class Solution {
+    public int maxSubArray(int[] nums) {
+
+      int cs = 0;
+      int maxSum = nums[0];
+      int i = 0;
+      while(i < nums.length){
+        cs = cs + nums[i];
+        if(cs > maxSum){
+            maxSum = cs;
+        }
+        if(cs < 0){
+            cs = 0;
+        }
+        i++;
+      }
+      return maxSum;
+    }
+}
+
