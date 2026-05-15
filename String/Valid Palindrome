@@ -10,7 +10,15 @@ Example 1:
 Input: s = "A man, a plan, a canal: Panama"
 Output: true
 Explanation: "amanaplanacanalpanama" is a palindrome.
+
+           /** [^a-zA-Z0-9] - This automatically removes:
+// spaces
+// commas
+// colons
+// symbols
+// special characters.
 **/
+
 
 class Solution {
     private static boolean  helper(String s, int si, int ei){
@@ -26,20 +34,8 @@ class Solution {
     }
     public boolean isPalindrome(String s) {
            
-          
-
-
-           /** [^a-zA-Z0-9] - This automatically removes:
-// spaces
-// commas
-// colons
-// symbols
-// special characters.
-**/
-             s = s.replaceAll("[^a-zA-Z0-9]","").toLowerCase();
+              s = s.replaceAll("[^a-zA-Z0-9]","").toLowerCase();
             return helper(s, 0, s.length()-1);
-
-
 
     }
 }
