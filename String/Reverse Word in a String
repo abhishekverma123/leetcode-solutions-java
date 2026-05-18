@@ -1,0 +1,42 @@
+# Given an input string s, reverse the order of the words.
+
+# A word is defined as a sequence of non-space characters. The words in s will be separated by at least one space.
+
+# Return a string of the words in reverse order concatenated by a single space.
+
+# Note that s may contain leading or trailing spaces or multiple spaces between two words. The returned string should only have a single space separating the words. Do not include any extra spaces.
+
+ 
+
+# Example 1:
+
+# Input: s = "the sky is blue"
+# Output: "blue is sky the"
+# Example 2:
+
+# Input: s = "  hello world  "
+# Output: "world hello"
+# Explanation: Your reversed string should not contain leading or trailing spaces.
+
+# Leet code problem :  151
+
+#code :
+class Solution {
+    private static String helper(String[] sAr, int si , int ei){
+                     String temp = "";
+                     while(si < ei){
+                         temp = sAr[si];
+                         sAr[si] = sAr[ei];
+                         sAr[ei] = temp;
+                         ei--; si++;
+                     }
+                     String s = String.join(" ", sAr);    # convert string arr into string
+                     return s;
+    }
+    public String reverseWords(String s) {   
+            s = s.trim().replaceAll("\\s+"," ");    #multiple white space replace into single space 
+           String[] sAr = s.split("\\s+");   
+              
+             return  helper(sAr,0,sAr.length-1);
+    }
+}
