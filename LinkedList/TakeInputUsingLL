@@ -1,0 +1,56 @@
+#Take a user input in the linked list with time complexity O(n)
+
+#Program
+
+
+import java.util.Scanner;
+class Node<T>{
+    // field 
+    T data;
+    Node<T> next;
+     // constructor 
+     Node(T data){
+        this.data = data;
+        this.next = null;
+     }
+}
+public class Main {
+    public static Node<Integer> createLinkedList(){
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the node :");
+          int data = sc.nextInt();
+             Node<Integer> head = null;
+             Node<Integer> tail = null;
+                while(data != -1){
+                   Node<Integer> currentNode = new Node<Integer>(data);
+                     if(head == null){
+                         head = currentNode;
+                         tail = currentNode;
+                     }
+                     tail.next = currentNode;
+                     tail = tail.next;
+                  data = sc.nextInt();    
+                } 
+            return head;
+    }
+    public static void printNode(Node<Integer> head){
+                  Node<Integer> temp = head;
+                  while(temp != null){
+                      // If it's the last node, don't print the arrow
+                      if(temp.next == null){
+                      System.out.print(temp.data);
+                      }
+                      else {
+                           System.out.print(temp.data +" -> ");
+                      }
+                      temp = temp.next;
+                  }
+        
+    }
+    public static void main(String[] args) {
+       
+          Node<Integer> head = createLinkedList();
+          printNode(head);
+    }
+}
