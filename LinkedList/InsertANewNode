@@ -1,0 +1,39 @@
+#You have been given a singly linked list of integers, an integer value called 'data' and a position with the name 'pos.'
+
+ #Write a function to add a node to the list with the 'data' at the specified position, 'pos.'
+
+#Note :
+#Assume that the Indexing for the singly linked list always starts from 0.
+
+#If the position is greater than the length of the singly linked list, you should return the same linked list without any change.
+# Illustration :
+
+public class Solution {
+
+	public static Node<Integer> insert(Node<Integer> head, int pos, int data){
+		//Your code goes here
+	          	// insert a node in the beginning
+                      // create a new Node 
+			  Node<Integer> newNode = new Node<>(data);
+		     if(pos == 0){
+				 newNode.next = head;
+				 return newNode;
+			 }
+             
+                // make a counter variable - helps to track the position
+                   int counter = 0;
+				   Node<Integer> tail = head;
+				   while(tail != null){
+					   if(counter == pos - 1){
+						    newNode.next  = tail.next;
+							tail.next = newNode;
+							break;
+					   }
+					   tail = tail.next;
+					   counter = counter + 1;
+				   }
+				   return head;
+
+	}
+}
+
