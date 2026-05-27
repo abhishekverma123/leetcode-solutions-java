@@ -1,0 +1,89 @@
+# Delete a node at any given position 
+import java.util.Scanner;
+class Node<T>{
+    // field 
+    T data;
+    Node<T> next;
+     // constructor 
+     Node(T data){
+        this.data = data;
+        this.next = null;
+     }
+}
+public class Main {
+    public static Node<Integer> createLinkedList(){
+        
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter the node :");
+          int data = sc.nextInt();
+             Node<Integer> head = null;
+             Node<Integer> tail = null;
+                while(data != -1){
+                   Node<Integer> currentNode = new Node<Integer>(data);
+                     if(head == null){
+                         head = currentNode;
+                         tail = currentNode;
+                     }
+                     tail.next = currentNode;
+                     tail = tail.next;
+                  data = sc.nextInt();    
+                } 
+            return head;
+    }
+    public static void printNode(Node<Integer> head){
+                  Node<Integer> temp = head;
+                  while(temp != null){
+                      // If it's the last node, don't print the arrow
+                    //   if(temp.next == null){
+                    //   System.out.print(temp.data);
+                    //   }
+                      if(head != null) {
+                           System.out.print(temp.data +" -> ");
+                      }
+                      temp = temp.next;
+                  }
+              System.out.println("null");
+    }
+    public static Node<Integer>  deleteANode(Node<Integer> head, int pos){
+
+       // Node<Integer> current = head;
+        // int length = 0;
+        // while(current != null){
+        //     length++;
+        //     current = current.next;
+        // }
+        // if(pos >= length){
+        //     return head;
+      //   }
+
+         if(head == null){
+            return head;
+        }
+
+        int counter = 0;
+        if(pos == 0){
+            return head.next;
+        }
+        else{
+        Node<Integer> tail = head;
+           while(tail != null && tail.next != null){
+               if(counter == pos - 1){
+                   tail.next = tail.next.next;
+                   break;
+               }
+               tail = tail.next;
+               counter++;
+           }
+        }
+          return head; 
+    }
+    public static void main(String[] args) {
+       
+          Node<Integer> head = createLinkedList();
+          printNode(head);
+        Node<Integer> newHead =  deleteANode(head,3);
+        System.out.println();
+         printNode(newHead);
+          
+    }
+}
