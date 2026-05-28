@@ -11,17 +11,29 @@ public class StackUsingArray {
 
 	}
 
-	public void push(int element) throws StackFullException {
+	public void push(int element) //throws StackFullException
+	{
 
 		// if stack is full
 
 		if (topIndex == data.length - 1) {
-			throw new StackFullException();
+			// throw new StackFullException();
+			doubleCapacity();
 		}
 		// data[++topIndex] = element;
 
 		this.data[++topIndex] = element;
 
+	}
+
+	private void doubleCapacity() {
+		
+		int temp[] = data;
+		data = new int[2 * temp.length];
+		for (int i = 0; i < temp.length; i++) {
+			data[i] = temp[i];
+		}
+		System.out.println("Double Capacity use !!!");
 	}
 
 	public int pop() throws StackEmptyException {
