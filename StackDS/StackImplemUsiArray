@@ -15,3 +15,6 @@
 3. top() / peek() - return the top element.
 4. isEmpty() - return true, if stack is empty. 
 5. size() - return the total number of element in the stack.
+
+
+Time complexity : all operation has o(1).
