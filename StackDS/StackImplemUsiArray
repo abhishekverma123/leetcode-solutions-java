@@ -1,1 +1,17 @@
+// Stack is a linear abstract data structure. It followa the LIFO (Last In First Out) principle,
+//Where the element inserted last is removed first.
 
+// ADS - means what operation a ds can do but not how it is implemented internally. 
+
+//  we can Stack Implementation  using two way:
+
+ 
+1. Stack Implemmetation using array
+2. Stack Implementation using Linked List
+
+// Operation of stacks 
+1. push(int data) - to insert a new elements on the top in the stack .
+2. pop() - to remove every toppest element of the stack .
+3. top() / peek() - return the top element.
+4. isEmpty() - return true, if stack is empty. 
+5. size() - return the total number of element in the stack.
