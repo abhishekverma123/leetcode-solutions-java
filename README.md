@@ -1,2 +1,1 @@
-# leetcode-solutions-java
-Daily LeetCode DSA solutions in Java with clear approach and complexity analysis
+Daily LeetCode solutions in Java with clean code, approach explanation, and time & space complexity analysis.
