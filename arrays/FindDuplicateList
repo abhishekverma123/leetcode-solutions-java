@@ -1,1 +1,41 @@
 
+/*
+ * Problem: Find Duplicate Elements in an Array
+ *
+ * Input:
+ * [1, 2, 3, 2, 4, 1]
+ *
+ * Output:
+ * [2, 1]
+ *
+ * Approach:
+ * - Use a HashSet to track visited elements.
+ * - If an element already exists in the HashSet,
+ *   add it to the duplicate list.
+ * - Traverse the array only once.
+ *
+ * Time Complexity: O(n)
+ * Space Complexity: O(n)
+ */
+                  public static void findDuplicates() {
+	                      
+		               int setArray[] = {1,2,3,2,4,1};     
+		                     List<Integer> store = new ArrayList<>();
+		                     
+		                    	 
+		     //  tc o(n)  -  hash set 
+		                      
+		                      Set<Integer> set = new HashSet<Integer>();
+		                         
+		                      for(int value : setArray) {
+		                      if(set.contains(value)) {
+		                    	  
+		                    	     store.add(value);   
+		              
+		                      }
+		                      set.add(value);
+		                      }
+		                      
+		           System.out.println("duplicate element "+ store); 
+
+}
