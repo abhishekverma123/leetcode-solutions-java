@@ -1,0 +1,204 @@
+# 3Sum - Brute Force Solution (Java)
+
+## Problem Statement
+
+Given an integer array `nums`, return all the unique triplets `[nums[i], nums[j], nums[k]]` such that:
+
+- `i != j`
+- `i != k`
+- `j != k`
+- `nums[i] + nums[j] + nums[k] == 0`
+
+The solution should not contain duplicate triplets.
+
+---
+
+## Approach
+
+This solution uses the **Brute Force** approach.
+
+1. Iterate through every unique combination of three elements using three nested loops.
+2. Check whether the sum of the selected elements is equal to `0`.
+3. Store the triplet in a temporary list.
+4. Sort the triplet so that all permutations become identical.
+5. Store the sorted triplet in a `HashSet` to automatically remove duplicates.
+6. Convert the `HashSet` into an `ArrayList` and return the result.
+
+---
+
+## Algorithm
+
+1. Create a `HashSet<List<Integer>>`.
+2. Traverse the array using three nested loops.
+3. Use:
+   - `i`
+   - `j = i + 1`
+   - `k = j + 1`
+4. If the sum of the three elements is `0`:
+   - Create a list.
+   - Sort it.
+   - Add it to the HashSet.
+5. Convert the HashSet into an ArrayList.
+6. Return the final list.
+
+---
+
+## Java Code
+
+```java
+import java.util.*;
+
+class Solution {
+
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        Set<List<Integer>> res = new HashSet<>();
+
+        for (int i = 0; i < nums.length; i++) {
+
+            for (int j = i + 1; j < nums.length; j++) {
+
+                for (int k = j + 1; k < nums.length; k++) {
+
+                    if (nums[i] + nums[j] + nums[k] == 0) {
+
+                        List<Integer> triplet = Arrays.asList(nums[i], nums[j], nums[k]);
+
+                        Collections.sort(triplet);
+
+                        res.add(triplet);
+                    }
+                }
+            }
+        }
+
+        return new ArrayList<>(res);
+    }
+}
+```
+
+---
+
+## Dry Run
+
+### Input
+
+```text
+nums = [-1, 0, 1, 2, -1, -4]
+```
+
+Valid Triplets Found
+
+```text
+(-1, 0, 1)
+(-1, 2, -1)
+(0, 1, -1)
+```
+
+After Sorting
+
+```text
+[-1, 0, 1]
+[-1, -1, 2]
+[-1, 0, 1]
+```
+
+HashSet removes the duplicate triplet.
+
+### Output
+
+```text
+[
+    [-1, -1, 2],
+    [-1, 0, 1]
+]
+```
+
+---
+
+## Why Sort Before Adding to HashSet?
+
+A `HashSet` removes duplicates only if two objects are equal.
+
+For Lists, equality depends on **both values and their order**.
+
+Without sorting:
+
+```text
+[-1, 0, 1]
+[0, -1, 1]
+[1, 0, -1]
+```
+
+All three are considered different.
+
+After sorting:
+
+```text
+[-1, 0, 1]
+[-1, 0, 1]
+[-1, 0, 1]
+```
+
+Now `HashSet` stores only one copy.
+
+---
+
+## Time Complexity
+
+| Operation | Complexity |
+|-----------|------------|
+| Three Nested Loops | O(n³) |
+| Sorting a Triplet | O(1) |
+| HashSet Insertion | O(1) Average |
+
+### Overall Time Complexity
+
+```text
+O(n³)
+```
+
+---
+
+## Space Complexity
+
+```text
+O(k)
+```
+
+where **k** is the number of unique triplets stored in the HashSet.
+
+---
+
+## Java Concepts Used
+
+- Arrays
+- ArrayList
+- HashSet
+- Collections.sort()
+- Arrays.asList()
+- Nested Loops
+- Generics
+- Brute Force Algorithm
+
+---
+
+## Key Learning
+
+- Generate every unique combination using `i < j < k`.
+- Sort each triplet before storing it in the `HashSet`.
+- `HashSet` removes duplicate triplets automatically.
+- Convert the `HashSet` into an `ArrayList` before returning the result because the method returns `List<List<Integer>>`.
+
+---
+
+## Future Improvement
+
+This brute-force solution has a time complexity of **O(n³)**.
+
+The optimized solution uses:
+
+- Sorting the array
+- Two Pointer Technique
+
+which reduces the time complexity to **O(n²)**.
