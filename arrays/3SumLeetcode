@@ -202,3 +202,272 @@ The optimized solution uses:
 - Two Pointer Technique
 
 which reduces the time complexity to **O(n²)**.
+
+
+
+# 3Sum - Optimal Solution (Sorting + Two Pointers) | Java
+
+## Problem Statement
+
+Given an integer array `nums`, return all the unique triplets `[nums[i], nums[j], nums[k]]` such that:
+
+- `i != j`
+- `i != k`
+- `j != k`
+- `nums[i] + nums[j] + nums[k] == 0`
+
+The solution must not contain duplicate triplets.
+
+---
+
+## Approach
+
+This solution uses the **Sorting + Two Pointer** technique to reduce the time complexity from **O(n³)** (Brute Force) to **O(n²)**.
+
+### Steps
+
+1. Sort the array.
+2. Fix one element using a loop.
+3. Use two pointers (`left` and `right`) to find the remaining two elements.
+4. If the sum is:
+   - **Less than 0** → Move the left pointer to the right.
+   - **Greater than 0** → Move the right pointer to the left.
+   - **Equal to 0** → Store the triplet and move both pointers.
+5. Skip duplicate values for:
+   - The first element (`i`)
+   - The left pointer
+   - The right pointer
+
+This ensures that only unique triplets are added to the result.
+
+---
+
+## Algorithm
+
+1. Sort the input array.
+2. Iterate through the array using index `i`.
+3. Skip duplicate values of `i`.
+4. Initialize:
+   - `left = i + 1`
+   - `right = nums.length - 1`
+5. While `left < right`:
+   - Calculate the sum.
+   - Move pointers according to the sum.
+   - If the sum is `0`:
+     - Store the triplet.
+     - Move both pointers.
+     - Skip duplicate values of `left` and `right`.
+6. Return the list of unique triplets.
+
+---
+
+## Java Code
+
+```java
+import java.util.*;
+
+class Solution {
+
+    public List<List<Integer>> threeSum(int[] nums) {
+
+        List<List<Integer>> result = new ArrayList<>();
+
+        Arrays.sort(nums);
+
+        for (int i = 0; i < nums.length; i++) {
+
+            // Skip duplicate first elements
+            if (i > 0 && nums[i] == nums[i - 1]) {
+                continue;
+            }
+
+            int left = i + 1;
+            int right = nums.length - 1;
+
+            while (left < right) {
+
+                int sum = nums[i] + nums[left] + nums[right];
+
+                if (sum == 0) {
+
+                    result.add(Arrays.asList(nums[i], nums[left], nums[right]));
+
+                    left++;
+                    right--;
+
+                    // Skip duplicate values for left pointer
+                    while (left < right && nums[left] == nums[left - 1]) {
+                        left++;
+                    }
+
+                    // Skip duplicate values for right pointer
+                    while (left < right && nums[right] == nums[right + 1]) {
+                        right--;
+                    }
+
+                } else if (sum < 0) {
+
+                    left++;
+
+                } else {
+
+                    right--;
+
+                }
+            }
+        }
+
+        return result;
+    }
+}
+```
+
+---
+
+## Example
+
+### Input
+
+```text
+nums = [-1,0,1,2,-1,-4]
+```
+
+### Sorted Array
+
+```text
+[-4,-1,-1,0,1,2]
+```
+
+### Output
+
+```text
+[
+    [-1,-1,2],
+    [-1,0,1]
+]
+```
+
+---
+
+## Dry Run
+
+### i = 1 (nums[i] = -1)
+
+```text
+left = 2
+right = 5
+
+-1 + (-1) + 2 = 0
+```
+
+Store:
+
+```text
+[-1,-1,2]
+```
+
+Move pointers:
+
+```text
+left = 3
+right = 4
+```
+
+Again:
+
+```text
+-1 + 0 + 1 = 0
+```
+
+Store:
+
+```text
+[-1,0,1]
+```
+
+---
+
+## Why Do We Skip Duplicate Elements?
+
+### Skip Duplicate First Element
+
+```java
+if (i > 0 && nums[i] == nums[i - 1]) {
+    continue;
+}
+```
+
+After sorting, duplicate values become adjacent.
+
+Without this check, the algorithm would generate the same triplets multiple times.
+
+### Skip Duplicate Left Pointer
+
+```java
+while (left < right && nums[left] == nums[left - 1]) {
+    left++;
+}
+```
+
+Avoids storing duplicate triplets caused by repeated values.
+
+### Skip Duplicate Right Pointer
+
+```java
+while (left < right && nums[right] == nums[right + 1]) {
+    right--;
+}
+```
+
+Prevents duplicate triplets from the right side.
+
+---
+
+## Time Complexity
+
+| Operation | Complexity |
+|-----------|------------|
+| Sorting | O(n log n) |
+| Outer Loop | O(n) |
+| Two Pointer Traversal | O(n) |
+
+### Overall Time Complexity
+
+```text
+O(n²)
+```
+
+---
+
+## Space Complexity
+
+```text
+O(1)
+```
+
+**Note:** Auxiliary space is `O(1)` (excluding the output list).
+
+---
+
+## Java Concepts Used
+
+- Arrays
+- ArrayList
+- Arrays.sort()
+- Arrays.asList()
+- Two Pointer Technique
+- Sorting
+- Nested Loops
+- Duplicate Handling
+
+---
+
+## Key Learnings
+
+- Sorting enables the use of the two-pointer technique.
+- The two-pointer approach reduces the time complexity from **O(n³)** to **O(n²)**.
+- Skipping duplicate values ensures that only unique triplets are returned.
+- After finding a valid triplet, move both pointers and skip duplicate values to avoid repeated results.
+
+
+
