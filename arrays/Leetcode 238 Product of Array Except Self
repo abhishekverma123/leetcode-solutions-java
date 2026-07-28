@@ -1,0 +1,83 @@
+##Product of Array Except Self
+
+##Problem Statement :
+
+Given an integer array nums, return an array answer such that answer[i] is equal to the product of all the elements of nums except nums[i].
+
+The product of any prefix or suffix of nums is guaranteed to fit in a 32-bit integer.
+
+You must write an algorithm that runs in O(n) time and without using the division operation.
+
+
+##Example
+Example 1:
+
+Input: nums = [1,2,3,4]
+Output: [24,12,8,6]
+Example 2:
+
+Input: nums = [-1,1,0,-3,3]
+Output: [0,0,9,0,0]
+ 
+
+Constraints:
+
+2 <= nums.length <= 105
+-30 <= nums[i] <= 30
+The input is generated such that answer[i] is guaranteed to fit in a 32-bit integer.
+
+
+
+##Approach : Brute Force
+
+1. Create a new array `answer` to store the result.
+
+2. Traverse the input array using the outer loop.
+
+3. For each index `i`, initialize a variable `product` to 1.
+
+4. Traverse the array again using the inner loop.
+
+5. If the current index `j` is not equal to `i`, multiply `product` by `nums[j]`.
+
+6. After the inner loop finishes, store the calculated product in `answer[i]`.
+
+7. Repeat the same process for every index.
+
+8. Return the `answer` array.
+
+## Code
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+ 
+
+    int[] answer = new int[nums.length];
+
+    for(int i = 0; i < nums.length; i++){
+           int product = 1;
+        for(int j = 0; j < nums.length; j++){
+                  if(i != j)
+                   product = product * nums[j];
+        }
+        answer[i] = product;
+    }
+
+      return answer;   
+    }
+}
+
+## Time Complexity & Space Complexity
+
+* Outer Loop → **O(n)**
+* Inner Loop → **O(n)**
+
+**Overall Time Complexity:** **O(n²)**
+
+## Space Complexity
+
+* Answer array → **O(n)**
+
+**Overall Space Complexity:** **O(n)**
+
+#
