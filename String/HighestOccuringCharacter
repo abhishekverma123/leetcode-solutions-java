@@ -81,3 +81,57 @@ Use a frequency array of size 26.
 Time Complexity : O(n)
 
 Space Complexity : O(1)
+
+
+#Solution : Optimal Approach 
+
+
+public class Solution {
+
+	public static char highestOccuringChar(String str) {
+		//Your code goes here
+
+  /*
+  1. create a frequency array of size 256, 
+  because 256 is the highest ascii value of character
+
+  2. Traverse the whole string and update most occurence chacter ascii value in the array 
+  3. find max , update max, if max is smaller 
+  4. save character in the variable and return character
+  */
+
+     int freq[] = new int[256];
+
+	 for(int i = 0; i < str.length(); i++){
+		    freq[str.charAt(i)] = freq[str.charAt(i)]+1;
+	 }
+
+    int max = -1;
+	char ch = ' ';
+	for(int i =0; i < str.length(); i++){
+		  if(max <  freq[str.charAt(i)]){
+			  max =  freq[str.charAt(i)];
+			  ch =  str.charAt(i);
+		  }
+	}
+
+             return ch;
+	}
+
+}
+
+
+# Time Complexity & Space Complexity
+
+## Time Complexity
+
+- Counting frequency: O(n)
+- Finding maximum frequency: O(n)
+
+Overall Time Complexity: O(n)
+
+## Space Complexity
+
+- Frequency array of size 256
+
+Overall Space Complexity: O(1)
