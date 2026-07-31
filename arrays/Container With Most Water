@@ -73,3 +73,52 @@ class Solution {
 
 TC - O(n^2)
 SC - O(1)
+
+
+## Optimal Approach :  Use Two Pointer
+
+-Take two pointers: left = 0 and right = n - 1, and run a loop while left < right.
+-Calculate the width of the container as right - left.
+-Select the minimum boundary using Math.min(height[left], height[right]) because the shorter boundary determines the amount of water.
+-Calculate the current area as width × containerHeight.
+-Keep track of the maximum water using a maxStoreWater variable.
+-If height[left] < height[right], move left++; otherwise, move right--.
+-Continue until left and right meet.
+-Return maxStoreWater.
+
+## code 
+class Solution {
+    public int maxArea(int[] height) {
+
+          int left = 0;
+          int right = height.length - 1;
+          int width = 0;
+          int length = 0;
+          int maxStoreWater = 0;
+           int containWater = 0;
+          while(left < right){
+                       width = right - left;
+                        length = Math.min(height[left], height[right]);
+                          containWater = width * length;
+
+                          maxStoreWater  = Math.max(maxStoreWater, containWater);
+
+                   if(height[left] < height[right]){
+                           left++;
+                   }
+                   else{
+                    right--;
+                   }
+
+                  
+          }
+
+          return maxStoreWater;
+    }
+}
+
+## Complexity : 
+
+TC - O(n)
+SC = O(1)
+
