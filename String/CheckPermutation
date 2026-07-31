@@ -1,0 +1,153 @@
+## Problem : Check Permutation 
+
+## Statemants : 
+
+For a given two strings, 'str1' and 'str2', check whether they are a permutation of each other or not.
+
+Permutations of each other
+Two strings are said to be a permutation of each other when either of the string's characters can be rearranged so that it becomes identical to the other one.
+
+Example: 
+str1= "sinrtg" 
+str2 = "string"
+
+The character of the first string(str1) can be rearranged to form str2 and hence we can say that the given strings are a permutation of each other.
+
+
+## Example :
+
+Sample Input 1:
+abcde
+baedc
+Sample Output 1:
+true
+Sample Input 2:
+abc
+cbd
+Sample Output 2:
+false
+
+
+## Aproach : First Brute - Force 
+
+First, check whether the lengths of both strings are the same. If they are different, return false because they cannot be permutations.
+Create a boolean visited array to keep track of which characters of the second string have already been used.
+Use a nested loop:
+The outer loop takes each character from the first string.
+The inner loop checks that character against every character of the second string.
+If the characters are the same and the character in the second string has not been visited:
+Mark that position as visited.
+Set found = true.
+Break the inner loop because the same character cannot be used again.
+After the inner loop finishes, check the found variable:
+If found == false, it means no matching unused character was found, so return false.
+Continue this process for every character of the first string.
+If all characters find a matching character, return true.
+
+## code 
+
+
+public class Solution {
+
+	public static boolean isPermutation(String str1, String str2) {
+		//Your code goes here
+
+           if(str1.length() != str2.length()){
+              return false;
+           }
+       
+
+        boolean visited[] = new boolean[str2.length()];
+
+        for(int i = 0; i < str1.length(); i++){
+           boolean found = false;
+           for(int j = 0; j < str2.length(); j++){
+              if(str1.charAt(i) == str2.charAt(j) && !visited[j]){
+                 visited[j] = true;
+                 found = true;
+                   break;
+              }
+           }
+           if(!found){
+              return false;
+           }
+        }
+
+           return true;
+	}
+
+}
+
+## Space and Time Complexity 
+
+TC : O(n^2)
+SC : O(n)
+
+## Another approach : Optimal Approach 
+## Optimal Approach — Frequency Array
+
+1. First, check whether the lengths of both strings are equal.
+
+   * If the lengths are different, they cannot be permutations, so return `false`.
+
+2. Create an integer frequency array of size `256`.
+
+   * This array stores the frequency of each character.
+
+3. Traverse the first string:
+
+   * For every character, increment its frequency in the array.
+
+4. Traverse the second string:
+
+   * For every character, decrement its frequency in the array.
+
+5. While decrementing, check whether the frequency becomes negative.
+
+   * If it becomes negative, the second string contains that character more times than the first string.
+   * Therefore, return `false`.
+
+6. If we finish traversing the second string without finding a negative frequency, both strings contain the same characters with the same frequency.
+
+7. Return `true`.
+
+
+
+  ## Code : 
+
+
+public class Solution {
+
+	public static boolean isPermutation(String str1, String str2) {
+		//Your code goes here
+      if(str1.length() != str2.length())
+      return false;
+         int size = str1.length();
+         
+       
+    
+      int freq[] = new int[256];
+          for(int i=0;i<str1.length();i++){
+             freq[str1.charAt(i)] +=1;
+          }
+           for(int i=0;i<str2.length();i++){
+             freq[str2.charAt(i)]-=1;
+        
+             if(freq[str2.charAt(i)]<0){
+                return false;
+            }
+             
+          }
+          
+          
+          
+      return true;
+	}
+
+}
+
+
+## Space and Time Complexity 
+
+TC : O(n)
+SC : O(1)
