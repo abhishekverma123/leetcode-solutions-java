@@ -1,0 +1,75 @@
+## Problem : Container With Most Water - leetcode : 11
+
+
+## Problem Statements
+You are given an integer array height of length n. There are n vertical lines drawn such that the two endpoints of the ith line are (i, 0) and (i, height[i]).
+
+Find two lines that together with the x-axis form a container, such that the container contains the most water.
+
+Return the maximum amount of water a container can store.
+
+Notice that you may not slant the container.
+
+## Example
+
+Example 1:
+
+
+Input: height = [1,8,6,2,5,4,8,3,7]
+Output: 49
+Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
+Example 2:
+
+Input: height = [1,1]
+Output: 1
+ 
+
+Constraints:
+
+n == height.length
+2 <= n <= 105
+0 <= height[i] <= 104
+
+
+## Solution Approach :  Brute Force 
+1.Select two boundaries, left and right.
+2.Use two nested loops to check every possible pair of boundaries.
+3.Start left from 0 and right from left + 1.
+4.Calculate the width as right - left.
+5.Find the minimum height between the two boundaries because the shorter boundary limits the water.
+6.Calculate the current water as width × minimumHeight.
+7.Maintain maxStoreWater and update it whenever the current water is greater.
+8.Return maxStoreWater.
+
+
+## Code - Brute Force
+
+class Solution {
+    public int maxArea(int[] height) {
+         int containMaxWater = 0;
+          int widthOfContainer = 0;
+          int heightOfContainer = 0;
+          int storeWater = 0;
+         for(int left = 0; left < height.length; left++){
+            for(int right = left + 1; right < height.length; right++){
+                 widthOfContainer = right - left;
+                  heightOfContainer = Math.min(height[left],height[right]);
+                   storeWater = widthOfContainer *  heightOfContainer;
+
+                   if(containMaxWater < storeWater){
+                          containMaxWater = storeWater;
+                   }
+            }
+         }
+
+         return  containMaxWater;
+
+
+    }
+}
+
+
+## Time and Space Complexity 
+
+TC - O(n^2)
+SC - O(1)
