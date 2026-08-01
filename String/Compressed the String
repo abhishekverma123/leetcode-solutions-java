@@ -1,0 +1,93 @@
+## Problem : Compressed the String
+
+## Problem Statement :
+
+Write a program to do basic string compression. For a character which is consecutively repeated more than once, replace consecutive duplicate occurrences with the count of repetitions.
+
+Example:
+If a string has 'x' repeated 5 times, replace this "xxxxx" with "x5".
+The string is compressed only when the repeated character count is more than 1.
+
+## Example:
+
+Sample Input 1:
+aaabbccdsa
+Sample Output 1:
+a3b2c2dsa
+Explanation for Sample Output 1:
+In the given string 'a' is repeated 3 times, 'b' is repeated 2 times, 'c' is repeated 2 times and 'd', 's' and 'a' and occuring 1 time hence no compression for last 3 characters.
+Sample Input 2:
+aaabbcddeeeee
+Sample Output 2:
+a3b2cd2e5
+
+## Appproach : Optimal Approach (Two Pointer)
+
+I use two pointers, i and j.
+Pointer i marks the beginning of the current group of consecutive characters.
+Pointer j moves forward to count how many times the current character repeats consecutively.
+Once a different character is found (or the end of the string is reached), I append the current character to the result. If its frequency is greater than 1, I also append the count.
+Then I move i directly to j to start processing the next group.
+Since both pointers only move forward and never revisit processed characters, each character is processed only once.
+
+
+## code :
+
+public class Solution {
+	public static String getCompressedString(String str) {
+		// Write your code here.
+
+       //  String compressed = "";
+         StringBuilder compressed = new StringBuilder();
+
+             int i =0;
+         while(i < str.length()){
+            int count = 1;
+            char ch = str.charAt(i);
+            int j = i + 1;
+            for( j = i + 1; j < str.length(); j++){
+               if(str.charAt(j) == ch){
+                  count++;
+               }
+               else{
+                 
+                  if(count > 1){
+                         compressed.append(ch);
+                         compressed.append(count);
+                  }
+                  else{
+                   compressed.append(ch);
+                        
+                   }
+              break;
+            }
+
+              
+         }
+               if(j == str.length())
+               {
+                  
+                if(count > 1){
+                      compressed.append(ch);
+                         compressed.append(count);
+                  }
+                  else{
+                   
+                     compressed.append(ch);
+               
+                   }
+               
+                   }
+               
+             i = j;
+         }
+         return compressed.toString();
+
+
+   }
+}
+
+## Complexity :
+
+TC : O(n)
+SC : O(n)
