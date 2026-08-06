@@ -1,0 +1,62 @@
+## Problem :  Longest Substring Without Repeating Characters Leetcode - 3
+
+## Problem Statement : Given a string s, find the length of the longest substring without duplicate characters.
+
+## Example :
+
+Input: s = "abcabcbb"
+Output: 3
+Explanation: The answer is "abc", with the length of 3. Note that "bca" and "cab" are also correct answers.
+Example 2:
+
+Input: s = "bbbbb"
+Output: 1
+Explanation: The answer is "b", with the length of 1.
+Example 3:
+
+Input: s = "pwwkew"
+Output: 3
+Explanation: The answer is "wke", with the length of 3.
+Notice that the answer must be a substring, "pwke" is a subsequence and not a substring.
+
+## Idea - Brute Force + HashSet
+
+-  take a two loop, outer loop starts from 0 to n - 1 , inner loop from i to n - 1.
+-  create  a hashset object inside outer loop, so every iteration, create a new hash set object
+- add a element in the hashset, if element is already contains so break the outer loop, if not then add and find a length initilize with 0 using max function 
+- formula is j - i + 1.
+- return length.
+
+## Code 
+
+import java.util.*;
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+            char ch = ' ';
+            int length = 0;
+               for(int i = 0; i < s.length(); i++){
+                  HashSet<Character> set = new HashSet<>();
+                for(int j = i; j < s.length(); j++){
+                        ch = s.charAt(j);
+
+                      
+
+                       if(set.contains(ch)){
+                        break;
+                       }
+                       
+                           set.add(ch);
+
+                             length = Math.max(length, j -i +1);
+                       
+                }
+               } 
+
+               return length; 
+    }
+}
+
+## Complexity :
+
+TC : O(n^2)
+Sc : O(n) - hashset use
