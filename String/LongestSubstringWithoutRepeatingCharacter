@@ -60,3 +60,58 @@ class Solution {
 
 TC : O(n^2)
 Sc : O(n) - hashset use
+
+
+
+##  Best Optimal Approach :  Sliding Window + Frequency Array 
+
+Use the Sliding Window technique with two pointers (left and right).
+Maintain a frequency array of size 256 to store the frequency of each ASCII character in the current window.
+Expand the window by moving the right pointer.
+If the current character appears more than once (frequency > 1), the current window becomes invalid.
+Shrink the window by moving the left pointer until the duplicate character is removed.
+After every valid window, update the maximum length.
+
+## Code : 
+
+class Solution {
+    public int lengthOfLongestSubstring(String s) {
+        int[] arr = new int[256];
+        int left = 0;
+        int right = 0;
+        int maxLength = 0;
+        while(right < s.length()){
+          //  char ch = s.charAt(right);
+
+         //   int convertCharAscii = (int)ch;
+
+            arr[s.charAt(right)]++;
+
+
+            while(arr[s.charAt(right)] > 1){
+                // char leftCh = s.charAt(left) ;
+                      // int leftCharAscii = (int)leftCh;
+                   arr[s.charAt(left)]--;
+                left++;
+            }
+
+            // int count = right - left + 1;
+            // if(maxLength < count){
+            //     maxLength = count;
+            // }
+
+            maxLength = Math.max(maxLength, right - left + 1);
+
+            right++;
+        }
+
+        return maxLength;
+    }
+}
+
+
+## Complexity :
+
+Time Complexity: O(n)
+
+Space Complexity: O(1)
