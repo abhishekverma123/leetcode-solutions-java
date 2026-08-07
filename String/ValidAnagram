@@ -1,0 +1,54 @@
+## Problem : Valid Anagram
+
+## Problem Statement : Given two strings s and t, return true if t is an anagram of s, and false otherwise.
+
+ ## Example:
+Example 1:
+
+Input: s = "anagram", t = "nagaram"
+
+Output: true
+
+Example 2:
+
+Input: s = "rat", t = "car"
+
+Output: false
+
+## Optimal Approach using Frequency Array 
+
+- take a array of size 256
+- first  traverse the loop for str1  and find a character and store in array to convert into ASCII value
+- same for str2 and check if freq array value in the given index is less than 0 so returen false otherwise after loop completion return true.
+- check, before start looping statement, both str length is same or not. if not, then return return false.
+
+## Code :
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+
+        int[] freq = new int[256];
+         if(s.length() != t.length()){
+            return false;
+         }
+
+        for(int i = 0; i < s.length(); i++){
+            freq[s.charAt(i)]+=1; 
+        }
+        for(int i = 0; i < t.length(); i++){
+            freq[t.charAt(i)]-=1; 
+
+            if(freq[t.charAt(i)] < 0) {
+                return false;
+            }
+        }
+
+        return true;
+        
+    }
+}
+
+## Time Complexity :
+O(n)
+## Space Complexity :
+O(1)
