@@ -1,0 +1,102 @@
+## Problem : Find first and last position of element in sorted array 
+
+## Problem Statement : 
+
+Given an array of integers nums sorted in non-decreasing order, find the starting and ending position of a given target value.
+
+If target is not found in the array, return [-1, -1].
+
+You must write an algorithm with O(log n) runtime complexity.
+
+
+ ## Example:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+Example 2:
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+Example 3:
+
+Input: nums = [], target = 0
+Output: [-1,-1]
+
+Input: nums = [0,2,2,2,2,2,7,7,10] , target = 2
+output : [1,5]
+
+## Approach :
+Binary Search Algorithm 
+- Find a first occurance using binary search algorithm and if target is found so save the index in the answer variable  then we have to move the right pointer with mid - 1 and find again 
+most first occurance, when left is greater than right we have to stop here 
+- same logic will use for a last occurance and where we move left pointer with mid + 1
+- return answer from both function and return the answer in the array.
+
+## Code :
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+
+        int left = firstOccurance(nums,target);
+       int right =  lastOccurance(nums,target);
+          return new int[]{left,right};
+    }
+
+        private static int firstOccurance(int nums[],int target){
+
+        
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        int ans = -1;
+        while(left <= right){
+            mid = left + (right - left) / 2;
+            if(nums[mid] == target){
+                ans = mid;
+                right = mid - 1;
+  }
+            else if(nums[mid] < target){
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+        
+    }
+
+
+        private static int lastOccurance(int nums[],int target){
+
+        
+        int left = 0;
+        int right = nums.length - 1;
+        int mid = 0;
+        int ans = -1;
+        while(left <= right){
+            mid = left + (right - left) / 2;
+            if(nums[mid] == target){
+                ans = mid;
+                left = mid + 1;
+  }
+            else if(nums[mid] < target){
+                left = mid + 1;
+            }
+            else {
+                right = mid - 1;
+            }
+        }
+
+        return ans;
+        
+    }
+}
+
+## Complexity : TC ; O(log n)
+Sc : O(1)
+
+O(log n) + O(log n)
+= O(2 log n)
+= O(log n)
